@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vs Pibito Undertale</title>
+    <title>Vs Pibito xd</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poller+One&family=Roboto:ital,wght@0,100..900;1,100..900&family=Signika:wght@300..700&display=swap" rel="stylesheet">
@@ -100,10 +100,16 @@
           intervaloBalas = setInterval(crearBala, 500); 
         }
 
-        function isColliding(el1, el2){
+        function isColliding(el1, el2, padding = 0){
             const r1 = el1.getBoundingClientRect();
             const r2 = el2.getBoundingClientRect();
-            return !(r1.right < r2.left || r1.left > r2.right || r1.bottom < r2.top || r1.top > r2.bottom);
+            const r2Shrunk = {
+            top: r2.top + padding,
+            right: r2.right - padding,
+            bottom: r2.bottom - padding,
+            left: r2.left + padding
+        };
+            return !(r1.right < r2Shrunk.left || r1.left > r2Shrunk.right || r1.bottom < r2Shrunk.top || r1.top > r2Shrunk.bottom);
         }
 
         function terminarTurnoEnemigo(){
@@ -184,7 +190,7 @@
             turnoEnemigo = true;
             ataquesRealizados = 0;
             velocidadbalah += 1.5;
-            velocidadbalav += 1.2;
+            velocidadbalav += 1.5;
             
             // --- CORREGIDO: operador ternario anidado ---
             const r = Math.random();
@@ -295,7 +301,7 @@
                     b.element.style.top = b.y + "px";
                 }
 
-                if (isColliding(soul, b.element)) {
+                if (isColliding(soul, b.element, 8)) {
                     const ahora = Date.now();
                     if (ahora - ultimoDaño > cooldownTiempo) {
                         hp -= 1;
@@ -342,6 +348,4 @@
     </script>
 </body>
 </html>
-
-
 
